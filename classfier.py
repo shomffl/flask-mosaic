@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, url_for, render_template
+from flask import Flask, request, redirect, url_for, render_template, Markup
 from werkzeug.utils import secure_filename
 import os
 import shutil
@@ -50,7 +50,7 @@ def result():
         image.save(new_path)
 
 
-        return render_template("result.html", filepath=new_path)
+        return render_template("result.html", result=Markup(result), filepath=new_path)
 
 
 if __name__ == "__main__":
