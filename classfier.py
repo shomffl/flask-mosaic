@@ -46,7 +46,7 @@ def result():
         image = Image.open(filepath)
         image = image.convert("RGB")
         image = image.resize((400, 400))
-        new_path= "./static/images/resize_image.png"
+        new_path= os.path.join(UPLOAD_FOLDER, "resize_image.png")
         image.save(new_path)
 
 

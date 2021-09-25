@@ -1,1 +1,1 @@
-web: gunicorn classfier:app --log-file -
+web: gunicorn classfier:app
