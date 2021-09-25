@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 import shutil
 from PIL import Image
-import numpy as np
+
 
 UPLOAD_FOLDER = "./static/images/"
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
