@@ -60,7 +60,7 @@ def result():
         create.connect_image()
 
 
-        return render_template("result.html", result=Markup(result), filepath=new_path)
+        return render_template("result.html", result=Markup(result), filepath="./static/images/download_original_files/mosaic_image.png")
 
 
 if __name__ == "__main__":
