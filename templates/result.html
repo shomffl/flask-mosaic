@@ -1,13 +1,16 @@
-{% extends "layout.html" %}
-{% block content %}
+{% extends "layout.html" %} {% block content %}
 <div class="container">
   <div class="col content">
     <h1>完了！！！</h1>
     {{result}}
-    <p><img src="{{filepath}}" width="400" height="400"></p>
+    <p><img src="{{filepath}}" width="400" height="400" /></p>
     <form method="get" action="/">
       <button class="submit">戻る</button>
     </form>
+
+    <a href="../static/images/download_original_files/mosaic_image.png" download
+      ><button>Download</button></a
+    >
   </div>
 </div>
 {% endblock %}

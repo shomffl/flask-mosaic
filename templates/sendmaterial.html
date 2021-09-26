@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+  <div class="col content">
+    <h1>素材選択</h1>
+    <form method="post", enctype="multipart/form-data", action="/sendmaterial">
+      <input name="file" type="file" multiple="multiple">
+      <input type="submit", value="作成">
+    </form>
+  </div>
+</div>
+{% endblock %}
