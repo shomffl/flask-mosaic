@@ -49,6 +49,12 @@ def fullscale():
 
 @app.route("/sendmaterial", methods=["GET", "POST"])
 def sendmaterial():
+    shutil.rmtree("./static/images/fullscale_images/big_material_files/")
+    shutil.rmtree("./static/images/fullscale_images/download_material_files/")
+    shutil.rmtree("./static/images/fullscale_images/small_material_files/")
+    os.makedirs("./static/images/fullscale_images/big_material_files/")
+    os.makedirs("./static/images/fullscale_images/download_material_files/")
+    os.makedirs("./static/images/fullscale_images/small_material_files/")
     if request.method == "POST":
         data = request.files.getlist("file")
         for id,name in enumerate(data):
