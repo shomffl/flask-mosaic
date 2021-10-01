@@ -63,11 +63,11 @@ def result():
         new_path= os.path.join(UPLOAD_FOLDER+"upload_image_files", "resize_image.png")
         image.save(new_path)
 
-        SplitOriginal(10, "./static/images/upload_image_files/resize_image.png","./static/images/split_image_files/").split_image()
+        SplitOriginal(8, "./static/images/upload_image_files/resize_image.png","./static/images/split_image_files/").split_image()
         read_original = GetRgb("split_image_files")
         read_material = GetRgb("simple_images/small_material_files")
         cul = CompareColors(read_original.get_rgb(), read_material.get_rgb()).compare()
-        create = ConnectImage(10, 400, cul,"simple_images")
+        create = ConnectImage(8, 400, cul,"simple_images")
         create.connect_image()
 
 
