@@ -1,10 +1,12 @@
-from flask import Flask, request, redirect, url_for, render_template, Markup
+from flask import Flask, request, render_template
 from werkzeug.utils import  secure_filename
 import os
 import shutil
 import pykakasi
-from split import SplitOriginal
-from get_rgb import GetRgb, CompareColors, ConnectImage
+from api.split import SplitOriginal
+from api.get_rgb import GetRgb
+from api.compare import  CompareColors
+from api.connect import ConnectImage
 import cv2
 
 
@@ -24,10 +26,6 @@ UPLOAD_FOLDER = "./static/images/"
 
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-
-
-
-
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -50,6 +48,8 @@ def result():
 
         # 画像の読み込み
         image = cv2.imread(filepath)
+
+        # 画像の縮小サイズを決定する
         height = image.shape[0]
         width = image.shape[1]
         longer_one = max(height, width)
@@ -61,14 +61,22 @@ def result():
         new_path= os.path.join(UPLOAD_FOLDER+"upload_image_files", "resize_image.png")
         cv2.imwrite(new_path, resize_image)
 
+        # オリジナル画像の分割
         split = SplitOriginal(5, f"{UPLOAD_FOLDER}upload_image_files/resize_image.png",f"{UPLOAD_FOLDER}split_images_file/")
+
+        #　画像を縦と横にいくつずつ結合するか決定する
         length = split.split_image()
         height_num = length[0]
         width_num = length[1]
 
+        # 画素値の読み込み
         read_original = GetRgb("split_images_file")
         read_material = GetRgb("simple_images/small_material_files")
+
+        # 画素値同士を比較する
         cul = CompareColors(read_original.get_rgb(), read_material.get_rgb()).compare()
+
+        # 画像を結合する
         create = ConnectImage(height_num, width_num, cul,"simple_images")
         create.connect_image()
 
